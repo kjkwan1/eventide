@@ -16,10 +16,11 @@ import { ArticleState } from "src/app/store/state/articles.state";
     public fetchAllArticles(): Observable<Article[]> {
       const requestUrl = NewsUrlInfo.BASE_URL
         + NewsUrlInfo.HEADLINES
-        + replace(NewsQueryParams.COUNTRY, 'us');
+        + replace(NewsQueryParams.COUNTRY, 'us')
+        + replace(NewsQueryParams.PAGE_SIZE, '100');
   
       return this.httpClient.get<HeadlineResponse>(requestUrl).pipe(
-        map((response: HeadlineResponse) => response.articles)
+        map((response: HeadlineResponse) => response.articles.filter((article) => article.title !== '[Removed]'))
       );
-    }  
+    }
   }

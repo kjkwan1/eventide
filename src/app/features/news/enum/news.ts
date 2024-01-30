@@ -7,8 +7,9 @@ export enum NewsUrlInfo {
 
 export enum NewsQueryParams {
     COUNTRY = 'country={{country}}&',
+    PAGE_SIZE = 'pageSize={{pageSize}}&',
+    QUERY = 'q={{query}}&',
     KEY = 'apiKey=' + NewsUrlInfo.API_KEY,
-    QUERY = 'q={{query}}&'
 }
 
 export enum NewsBaseCategories {

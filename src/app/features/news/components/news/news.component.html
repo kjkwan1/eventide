@@ -1,5 +1,5 @@
 <section id="news" class="news" *ngIf="!(isArticlesLoading$ | async)">
     @for (article of articles$ | async; track article.title) {
-        <div class="article">{{ article.content }}</div>
+        <news-article [articleInput]="article"></news-article>
     }
 </section>
