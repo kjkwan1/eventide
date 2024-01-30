@@ -1,1 +1,5 @@
-<p>news works!</p>
+<section id="news" class="news" *ngIf="!(isArticlesLoading$ | async)">
+    @for (article of articles$ | async; track article.title) {
+        <div class="article">{{ article.content }}</div>
+    }
+</section>

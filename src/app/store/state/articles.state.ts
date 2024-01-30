@@ -7,10 +7,10 @@ export interface ArticleState extends EntityState<Article> {
 }
 
 export const adapter: EntityAdapter<Article> = createEntityAdapter<Article>({
-  // TODO: sort comparison
+  selectId: (article: Article) => article.url
 });
 
 export const initialArticleState: ArticleState = adapter.getInitialState({
-  isLoading: false,
+  isLoading: true,
   error: null,
 });

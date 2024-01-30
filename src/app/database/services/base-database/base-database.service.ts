@@ -27,8 +27,21 @@ export abstract class BaseDatabaseService<T> {
     });
   }
 
-  public add(record: T): Promise<IDBValidKey> {
+  public add<T>(record: T): Promise<IDBValidKey> {
     return this.db.add(this.storeName, record);
+  }
+
+  public async addMany(records: T[]): Promise<IDBValidKey[]> {
+    const keys: IDBValidKey[] = [];
+    for (let record of records) {
+      try {
+        const key = await this.add(record);
+        keys.push(key);
+      } catch(e) {
+        console.error(e);
+      }
+    }
+    return keys;
   }
 
   public getAll(): Promise<T[]> {

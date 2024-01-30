@@ -1,26 +1,25 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { Observable, catchError, map, mergeMap, of } from "rxjs";
+import { map, switchMap } from "rxjs";
 import { NewsDataService } from "src/app/core/services/news-data.service";
-import { loadArticles, loadArticlesFailure, loadArticlesSuccess } from "../actions/news.actions";
-import { Action } from "@ngrx/store";
+import { loadArticles, loadArticlesSuccess } from "../actions/news.actions";
+import { NewsDatabase } from "src/app/database/services/news-database/news.database";
+import { Article } from "src/app/features/news/model/news-model";
 
 @Injectable()
-export class ArticleEffects {
-  loadArticles$: Observable<Action> = createEffect(() =>
+export class NewsEffects {
+  loadArticles$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadArticles),
-      mergeMap(() =>
-        this.newsDataService.fetchAllArticles().pipe(
-          map(articles => loadArticlesSuccess({ articles })),
-          catchError(error => of(loadArticlesFailure({ error })))
-        )
-      )
+      switchMap(() => this.newsDataService.fetchAllArticles()),
+      switchMap((articles) => this.newsDatabase.updateArticlesInDb(articles)),
+      map((articles: Article[]) => loadArticlesSuccess({ articles }))
     )
-  );
+  )
 
   constructor(
     private actions$: Actions,
+    private newsDatabase: NewsDatabase,
     private newsDataService: NewsDataService
   ) {}
 }

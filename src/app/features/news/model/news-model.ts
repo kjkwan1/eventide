@@ -1,4 +1,4 @@
-export interface NewsResponse {
+export interface HeadlineResponse {
     status: string;
     totalResults: number;
     articles: Article[]

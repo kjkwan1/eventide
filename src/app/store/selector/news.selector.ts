@@ -8,3 +8,8 @@ export const selectAllArticles = createSelector(
   selectArticleState,
   selectAll
 );
+
+export const isArticlesLoading = createSelector(
+  selectArticleState,
+  (state) => state.isLoading
+)
