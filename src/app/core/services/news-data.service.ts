@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable, map } from "rxjs";
-import { NewsQueryParams, NewsUrlInfo } from "src/app/features/news/enum/news";
+import { NewsBaseCategories, NewsQueryParams, NewsUrlInfo } from "src/app/features/news/enum/news";
 import { Article, HeadlineResponse } from "src/app/features/news/model/news-model";
 import { replace } from "src/app/shared/text-helpers";
 import { ArticleState } from "src/app/store/state/articles.state";
@@ -22,5 +22,15 @@ import { ArticleState } from "src/app/store/state/articles.state";
       return this.httpClient.get<HeadlineResponse>(requestUrl).pipe(
         map((response: HeadlineResponse) => response.articles.filter((article) => article.title !== '[Removed]'))
       );
+    }
+
+    public fetchArticlesByCategory(category: NewsBaseCategories): Observable<Article[]> {
+      const requestUrl = NewsUrlInfo.BASE_URL
+        + NewsUrlInfo.EVERYTHING
+        + replace(NewsQueryParams.QUERY, category);
+
+        return this.httpClient.get<HeadlineResponse>(requestUrl).pipe(
+          map((response: HeadlineResponse) => response.articles.filter((article) => article.title !== '[Removed]'))
+        );
     }
   }
