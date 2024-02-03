@@ -1,3 +1,5 @@
-<li class="selector">
-    
-</li>
+<ul class="selector">
+    @for (category of categories; track $index) {
+        <li class="button" (click)="onSelect(category)">{{ category }}</li>
+    }
+</ul>

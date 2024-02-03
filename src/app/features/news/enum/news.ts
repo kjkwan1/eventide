@@ -1,18 +1,16 @@
 export enum NewsUrlInfo {
-    API_KEY = '3688e3a78f7a45e1b978b3f6304d5442',
-    BASE_URL = 'https://newsapi.org/v2/',
-    EVERYTHING = 'everything?',
+    BASE_URL = 'http://api.mediastack.com/v1/news',
     HEADLINES = 'top-headlines?',
 }
 
 export enum NewsQueryParams {
-    COUNTRY = 'country={{country}}&',
-    PAGE_SIZE = 'pageSize={{pageSize}}&',
-    QUERY = 'q={{query}}&',
-    KEY = 'apiKey=' + NewsUrlInfo.API_KEY,
+    COUNTRIES = '&countries={{country}}',
+    KEYWORDS = '&keywords={{query}}',
+    ACCESS_KEY = '?access_key={{key}}'
 }
 
 export enum NewsBaseCategories {
+    GENERAL = 'general',
     SPORTS = 'sports',
     TECH = 'technology',
     ECONOMY = 'economy',

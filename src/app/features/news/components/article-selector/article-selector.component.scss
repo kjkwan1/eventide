@@ -1,0 +1,22 @@
+@import '/src/styles/variables';
+
+.selector {
+    display: flex;
+    list-style: none;
+    box-sizing: border-box;
+    max-width: 50%;
+    justify-content: space-evenly;
+    height: auto;
+}
+
+.button {
+    margin: 1rem;
+    background-color: $color-secondary;
+    color: $color-text;
+    padding: 1rem;
+    width: 10rem;
+    display: flex;
+    justify-content: center;
+    user-select: none;
+    border-radius: 0.2rem;
+}

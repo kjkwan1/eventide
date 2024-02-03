@@ -1,21 +1,20 @@
 import { createReducer, on } from "@ngrx/store";
 import { adapter, initialArticleState } from "../state/articles.state";
-import { loadArticles, loadArticlesFailure, loadArticlesSuccess } from "../actions/news.actions";
+import { updateArticlesInView, updateArticlesInViewFailure, updateArticlesInViewSuccess } from "../actions/news.actions";
 
 export const articleReducer = createReducer(
   initialArticleState,
-  on(loadArticles, state => ({
+  on(updateArticlesInView, state => ({
     ...state,
     isLoading: true,
     error: null
   })),
-  on(loadArticlesSuccess, (state, { articles }) => 
-    adapter.setAll(articles, {
-      ...state,
-      isLoading: false
-    })
-  ),
-  on(loadArticlesFailure, (state, { error }) => ({
+  on(updateArticlesInViewSuccess, (state, { articles }) => ({
+    ...adapter.setAll(articles, state),
+    isLoading: false,
+    error: null
+  })),
+  on(updateArticlesInViewFailure, (state, { error }) => ({
     ...state,
     isLoading: false,
     error: error

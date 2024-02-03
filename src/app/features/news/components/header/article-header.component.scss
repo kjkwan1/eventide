@@ -1,0 +1,14 @@
+.news-header {
+    & > * {
+        margin: 1rem 0;
+    }
+}
+
+.subtitle, .author {
+    font-weight: 400;
+}
+
+.subtitle {
+    display: flex;
+    justify-content: space-between;
+}

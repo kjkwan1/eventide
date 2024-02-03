@@ -7,25 +7,30 @@ import { Database } from '../../model/base-database';
 })
 export abstract class BaseDatabaseService<T> {
   protected db!: IDBPDatabase<Database>;
-  protected version: number = 1;
+  protected version: number = 13;
 
   private dbName: string = 'eventide';
 
   protected constructor(protected storeName: string) {
     this.storeName = storeName;
-    this.initDb();
   }
 
-  private async initDb(): Promise<void> {
+  protected upgradeDb(db: IDBPDatabase<Database>, oldVersion?: number, newVersion?: IDBTransaction): void {
     const storeName = this.storeName;
+    if (!db.objectStoreNames.contains(storeName)) {
+      db.createObjectStore(storeName, { keyPath: 'id', autoIncrement: true });
+    }
+  }
+
+  public async initDb(): Promise<void> {
+    const upgradeDb = this.upgradeDb.bind(this)
     this.db = await openDB<Database>(this.dbName, this.version, {
       upgrade(db) {
-        if (!db.objectStoreNames.contains(storeName)) {
-          db.createObjectStore(storeName, { keyPath: 'id', autoIncrement: true });
-        }
+        upgradeDb(db)
       }
     });
   }
+
 
   public add<T>(record: T): Promise<IDBValidKey> {
     return this.db.add(this.storeName, record);
@@ -33,16 +38,18 @@ export abstract class BaseDatabaseService<T> {
 
   public async addMany(records: T[]): Promise<IDBValidKey[]> {
     const keys: IDBValidKey[] = [];
+    const tx = this.db.transaction(this.storeName, 'readwrite');
+    const store = tx.objectStore(this.storeName);
+
     for (let record of records) {
-      try {
-        const key = await this.add(record);
-        keys.push(key);
-      } catch(e) {
-        console.error(e);
-      }
+      const key = await store.add(record);
+      keys.push(key);
     }
+
+    await tx.done;
     return keys;
   }
+
 
   public getAll(): Promise<T[]> {
     return this.db.getAll(this.storeName);

@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { AppState } from 'src/app/store/state/app.state';
-import { Article } from '../../model/news-model';
+import { MediaStackArticle } from '../../model/news-model';
 import { isArticlesLoading, selectAllArticles } from 'src/app/store/selector/news.selector';
 
 @Component({
@@ -13,7 +13,7 @@ import { isArticlesLoading, selectAllArticles } from 'src/app/store/selector/new
 })
 export class NewsComponent implements OnInit {
   public isArticlesLoading$!: Observable<boolean>;
-  public articles$!: Observable<Article[]>;
+  public articles$!: Observable<MediaStackArticle[]>;
   constructor(private store: Store<AppState>) {}
 
   public ngOnInit(): void {

@@ -36,10 +36,13 @@ h1,
 h2,
 h3,
 h4,
-p,
 span,
 li,
 i,
 s {
     font-size: $font-size;
+}
+
+p {
+    font-size: $font-size-paragraph
 }

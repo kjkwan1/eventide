@@ -3,12 +3,17 @@ import { Observable } from 'rxjs';
 
 export abstract class BaseTokenInterceptor implements HttpInterceptor {
 
-  abstract getAuthToken(): string;
+  abstract getRequestUrlWithAuthToken(url: string): string;
+
+  abstract isValid(request: HttpRequest<any>): boolean;
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const authToken = this.getAuthToken();
+    if (!this.isValid(req)) {
+      return next.handle(req);
+    } 
+    const requestUrl = this.getRequestUrlWithAuthToken(req.url);
     const authReq = req.clone({
-      url: req.url + authToken
+      url: requestUrl
     });
     return next.handle(authReq);
   }

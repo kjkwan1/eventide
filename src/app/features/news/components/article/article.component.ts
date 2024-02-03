@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Article } from '../../model/news-model';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { MediaStackArticle } from '../../model/news-model';
 import { ImageService } from 'src/app/core/services/image.service';
 import { Observable } from 'rxjs';
 import { SafeUrl } from '@angular/platform-browser';
@@ -12,12 +12,12 @@ import { SafeUrl } from '@angular/platform-browser';
 })
 export class ArticleComponent {
   @Input()
-  public set articleInput(article: Article) {
+  public set articleInput(article: MediaStackArticle) {
     this.article = article;
-    this.articleImage$ = this.imageService.getImage(article.urlToImage);
+    this.articleImage$ = this.imageService.getImage(article.image);
   };
 
-  public article!: Article;
+  public article!: MediaStackArticle;
   public articleImage$!: Observable<SafeUrl | null>;
   constructor(private imageService: ImageService) {}
 

@@ -1,5 +1,5 @@
-import { Article } from "src/app/features/news/model/news-model";
+import { MediaStackArticle } from "src/app/features/news/model/news-model";
 
 export interface Database {
-    articles: Article[];
+    articles: MediaStackArticle[];
 }
