@@ -7,6 +7,7 @@ import { NewsBaseCategories } from 'src/app/features/news/enum/news';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/state/app.state';
 import { updateArticlesInView } from 'src/app/store/actions/news.actions';
+import { MetadataDatabase } from 'src/app/database/services/metadata-database/metadata-database';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,12 @@ import { updateArticlesInView } from 'src/app/store/actions/news.actions';
 export class NewsInitializationService implements Initializable {
   constructor(
     private newsDataService: NewsDataService,
+    private metadataDatabase: MetadataDatabase,
     private newsDatabase: NewsDatabase,
     private store: Store<AppState>,
   ) { }
 
   public async init(): Promise<void> {
-    await this.newsDatabase.initDb();
     await this.initializeHeadlineArticles();
     // await this.initializeCategoryArticles();
   }
@@ -30,7 +31,7 @@ export class NewsInitializationService implements Initializable {
       if (!headlines || !headlines.length) {
         return;
       }
-      await this.newsDatabase.addMany(headlines);
+      await this.newsDatabase.addArticles(headlines);
       this.store.dispatch(updateArticlesInView({
         category: NewsBaseCategories.GENERAL
       }));
@@ -47,7 +48,7 @@ export class NewsInitializationService implements Initializable {
         if (!articles || !articles.length) {
           return;
         }
-        await this.newsDatabase.addMany(articles);
+        await this.newsDatabase.addArticles(articles);
       } catch(e) {
         console.error(e);
       }

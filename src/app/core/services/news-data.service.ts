@@ -24,6 +24,12 @@ import { ArticleState } from "src/app/store/state/articles.state";
       const requestUrl = 'https://api.fakend.fyi/pVdtG8NnhIbkBbgeQa7g/6BgV9ZqGQNgwdnqtw2WE';
       return this.httpClient.get<MockMediaStackResponse>(requestUrl).pipe(
           map((response: MockMediaStackResponse) => response.payload.data),
+          map((articles: MediaStackArticle[]) => articles.map((article) => {
+            return {
+              ...article,
+              date: new Date(article.published_at).toLocaleString(),
+            }
+          }))
       );
 
     }
@@ -31,6 +37,7 @@ import { ArticleState } from "src/app/store/state/articles.state";
     public fetchArticlesByCategory(category: NewsBaseCategories): Observable<MediaStackArticle[]> {
       const requestUrl = NewsUrlInfo.BASE_URL
         + NewsQueryParams.ACCESS_KEY
+        + replace(NewsQueryParams.COUNTRIES, 'us');
         + replace(NewsQueryParams.KEYWORDS, category);
 
         return this.httpClient.get<MediaStackResponse>(requestUrl).pipe(
