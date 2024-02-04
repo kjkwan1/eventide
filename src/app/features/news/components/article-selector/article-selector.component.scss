@@ -1,22 +1,33 @@
 @import '/src/styles/variables';
+:host {
+    width: 100%;
+}
 
 .selector {
     display: flex;
     list-style: none;
     box-sizing: border-box;
-    max-width: 50%;
-    justify-content: space-evenly;
+    max-width: 100%;
+    justify-content: space-around;
     height: auto;
+    position: relative;
 }
 
 .button {
-    margin: 1rem;
+    margin: 0.4rem;
     background-color: $color-secondary;
     color: $color-text;
     padding: 1rem;
-    width: 10rem;
     display: flex;
+    flex: 1;
     justify-content: center;
     user-select: none;
     border-radius: 0.2rem;
+    box-shadow: $box-shadow-light;
+}
+
+.filter-btn {
+    border: none;
+    background-color: none;
+    padding: 1rem 2rem;
 }

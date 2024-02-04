@@ -37,8 +37,8 @@ import { ArticleState } from "src/app/store/state/articles.state";
     public fetchArticlesByCategory(category: NewsBaseCategories): Observable<MediaStackArticle[]> {
       const requestUrl = NewsUrlInfo.BASE_URL
         + NewsQueryParams.ACCESS_KEY
-        + replace(NewsQueryParams.COUNTRIES, 'us');
         + replace(NewsQueryParams.KEYWORDS, category);
+        + replace(NewsQueryParams.COUNTRIES, 'us');
 
         return this.httpClient.get<MediaStackResponse>(requestUrl).pipe(
           map((response: MediaStackResponse) => response.data),

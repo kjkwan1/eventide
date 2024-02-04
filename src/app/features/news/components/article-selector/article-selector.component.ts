@@ -10,9 +10,14 @@ import { NewsService } from '../../news.service';
 })
 export class ArticleSelectorComponent {
   public categories = Object.values(NewsBaseCategories);
+  public showMenu: boolean = false;
   constructor(private newsService: NewsService) {}
 
   public onSelect(category: NewsBaseCategories) {
     this.newsService.selectCategory(category);
+  }
+
+  public toggle() {
+    this.showMenu = !this.showMenu;
   }
 }

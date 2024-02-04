@@ -4,7 +4,7 @@
         <article-selector></article-selector>
     </header>
     <div class="articles">
-        @for (article of articles$ | async; track article.id) {
+        @for (article of articles$ | async | slice: 0 : loadedArticleLength; track article.id) {
             <news-article [articleInput]="article"></news-article>
         }
     </div>

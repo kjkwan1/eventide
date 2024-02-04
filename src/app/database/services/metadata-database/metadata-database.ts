@@ -12,7 +12,13 @@ export class MetadataDatabase {
     }
 
     public async updateLastUpdated(category: string): Promise<IDBValidKey> {
-        return this.baseDatabaseService.update(this.storeName, new Date(), category);
+        return this.baseDatabaseService.update(
+            this.storeName,
+            {
+                category,
+                lastUpdated: new Date().toString()
+            }, 
+        );
     }
 
     public async getLastUpdated(category: string): Promise<IMetadataDatabase> {

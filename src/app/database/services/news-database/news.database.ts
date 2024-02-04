@@ -21,6 +21,6 @@ export class NewsDatabase{
     }
   
     public getByCategory(category: NewsBaseCategories): Promise<MediaStackArticle[]> {
-      return this.baseDatabaseService.getAllFromIndex(this.storeName, DATABASE_INDEX.BY_CATEGORY);
+      return this.baseDatabaseService.getAllFromIndex(this.storeName, DATABASE_INDEX.BY_CATEGORY, category);
     }
 }

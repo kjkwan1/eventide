@@ -11,10 +11,10 @@ export enum NewsQueryParams {
 
 export enum NewsBaseCategories {
     GENERAL = 'general',
+    BUSINESS = 'business',
+    ENTERTAINMENT = 'entertainment',
+    HEALTH = 'health',
+    SCIENCE = 'science',
     SPORTS = 'sports',
     TECH = 'technology',
-    ECONOMY = 'economy',
-    POLITICS = 'politics',
-    SCIENCE = 'science',
-    GEOLOGY = 'geology',
 }

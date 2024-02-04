@@ -14,6 +14,7 @@ import { isArticlesLoading, selectAllArticles } from 'src/app/store/selector/new
 export class NewsComponent implements OnInit {
   public isArticlesLoading$!: Observable<boolean>;
   public articles$!: Observable<MediaStackArticle[]>;
+  public loadedArticleLength: number = 25;
   constructor(private store: Store<AppState>) {}
 
   public ngOnInit(): void {

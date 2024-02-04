@@ -3,6 +3,7 @@ import { IDBPDatabase, openDB } from 'idb';
 import { Database } from '../../model/base-database';
 import { DATABASE_STORES } from '../../enum/database-stores';
 import { DATABASE_INDEX } from '../../enum/database-index';
+import { NewsBaseCategories } from 'src/app/features/news/enum/news';
 
 @Injectable({
   providedIn: 'root'
@@ -49,8 +50,8 @@ export class BaseDatabaseService {
     return keys;
   }
 
-  public update<T>(storeName: string, record: T, key: IDBValidKey) {
-    return this.db.put(storeName, record, key);
+  public update<T>(storeName: string, record: T) {
+    return this.db.put(storeName, record);
   }
 
   public get<T>(storeName: string, key: IDBValidKey): Promise<T> {
@@ -65,8 +66,8 @@ export class BaseDatabaseService {
     return this.db.getFromIndex(storeName, indexName, key);
   }
 
-  public getAllFromIndex<T>(storeName: string, indexName: string): Promise<T[]> {
-    return this.db.getAllFromIndex(storeName, indexName);
+  public getAllFromIndex<T>(storeName: string, indexName: string, category: NewsBaseCategories): Promise<T[]> {
+    return this.db.getAllFromIndex(storeName, indexName, category);
   }
 
   public delete(storeName: string, key: IDBValidKey) {
