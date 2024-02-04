@@ -3,10 +3,16 @@ import { ArticleState, initialArticleState } from "./articles.state";
 
 export interface AppState {
     articles: ArticleState,
-    categoryUpdateData: Partial<Record<NewsBaseCategories, string>>
+    categoryUpdateData: Partial<Record<NewsBaseCategories, string>>,
+    db: {
+        isDatabaseInitialized: boolean
+    }
 }
 
 export const initialState: AppState = {
     articles: initialArticleState,
-    categoryUpdateData: {}
+    categoryUpdateData: {},
+    db: {
+        isDatabaseInitialized: false,
+    }
 }

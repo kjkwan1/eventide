@@ -9,13 +9,11 @@ import { DATABASE_INDEX } from '../../enum/database-index';
 })
 export class BaseDatabaseService {
   private db!: IDBPDatabase<Database>;
-  private version: number = 25;
+  private version: number = 26;
 
   private dbName: string = 'eventide';
 
-  constructor() {
-    this.initDb();
-  }
+  constructor() {}
 
   public async initDb(): Promise<void> {
     this.db = await openDB<Database>(this.dbName, this.version, {

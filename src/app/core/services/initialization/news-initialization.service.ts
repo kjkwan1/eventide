@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { NewsDataService } from '../news-data.service';
 import { NewsDatabase } from 'src/app/database/services/news-database/news.database';
 import { Initializable } from '../initializable';
-import { firstValueFrom } from 'rxjs';
+import { filter, firstValueFrom, take } from 'rxjs';
 import { NewsBaseCategories } from 'src/app/features/news/enum/news';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/state/app.state';
 import { updateArticlesInView } from 'src/app/store/actions/news.actions';
 import { MetadataDatabase } from 'src/app/database/services/metadata-database/metadata-database';
+import { isDatabaseInitialized } from 'src/app/store/selector/db-selector';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,15 @@ export class NewsInitializationService implements Initializable {
 
   public async initializeHeadlineArticles(): Promise<void> {
     try {
+      // let lastUpdated = await this.metadataDatabase.getLastUpdated(NewsBaseCategories.GENERAL);
+      // if (!lastUpdated) {
+      //   await this.metadataDatabase.updateLastUpdated(NewsBaseCategories.GENERAL);
+      //   lastUpdated = await this.metadataDatabase.getLastUpdated(NewsBaseCategories.GENERAL);
+      // }
+      // if (lastUpdated && lastUpdated.toString() < new Date().toString()) {
+      //   return;
+      // }
+
       const headlines = await firstValueFrom(this.newsDataService.fetchAllArticles());
       if (!headlines || !headlines.length) {
         return;

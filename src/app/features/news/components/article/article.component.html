@@ -1,4 +1,4 @@
-<img class="image" [src]="articleImage$ | async"  alt="Failed to load image">
+<img class="image" *ngIf="articleImage$ | async as articleImage" [src]="articleImage" alt="Failed to load image">
 <article class="article">
     <article-header [article]="article"></article-header>
     <article-content [article]="article"></article-content>

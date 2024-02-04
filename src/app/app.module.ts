@@ -12,14 +12,16 @@ import { NewsTokenInterceptor } from './core/interceptors/news/news-token.interc
 import { CoreModule } from './core/core.module';
 import { DatabaseModule } from './database/database.module';
 import { NewsModule } from './features/news/news.module';
+import { dbReducer } from './store/reducers/db-reducers';
+import { DBEffects } from './store/effects/db-effects';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    StoreModule.forRoot({ articles: articleReducer }),
-    EffectsModule.forRoot(NewsEffects),
+    StoreModule.forRoot({ articles: articleReducer, db: dbReducer }),
+    EffectsModule.forRoot([NewsEffects, DBEffects]),
     CoreModule,
     DatabaseModule,
     NewsModule,
