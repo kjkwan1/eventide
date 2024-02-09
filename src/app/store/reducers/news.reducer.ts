@@ -9,10 +9,11 @@ export const articleReducer = createReducer(
     isLoading: true,
     error: null
   })),
-  on(updateArticlesInViewSuccess, (state, { articles }) => ({
+  on(updateArticlesInViewSuccess, (state, { articles, headlineArticle }) => ({
     ...adapter.setAll(articles, state),
     isLoading: false,
-    error: null
+    error: null,
+    heroArticle: headlineArticle || null,
   })),
   on(updateArticlesInViewFailure, (state, { error }) => ({
     ...state,

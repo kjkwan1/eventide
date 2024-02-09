@@ -1,11 +1,19 @@
 <section id="news" class="news" *ngIf="!(isArticlesLoading$ | async)">
-    <header class="news__header">
-        <h1 class="heading">Breaking News</h1>
-        <article-selector></article-selector>
-    </header>
-    <div class="articles">
-        @for (article of articles$ | async | slice: 0 : loadedArticleLength; track article.id) {
-            <news-article [articleInput]="article"></news-article>
-        }
-    </div>
+    @if(articles$ | async; as articles) {
+        <div class="content">
+            <div class="content__hero">
+                <news-hero [headline]="headline$ | async"></news-hero>
+            </div>
+            <div class="content__headlines">
+                @for (article of articles | slice: 0 : 3; track article.id; let index = $index) {
+                    <article-med [article]="article" [index]="index + 1"></article-med>
+                }
+            </div>
+            <div class="content__articles">
+                @for (article of articles | slice: 3 : 9; track article.id) {
+                    <article-header [article]="article"></article-header>
+                }
+            </div>
+        </div>
+    }
 </section>

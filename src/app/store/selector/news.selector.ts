@@ -13,3 +13,8 @@ export const isArticlesLoading = createSelector(
   selectArticleState,
   (state) => state.isLoading
 )
+
+export const selectHeadlineArticle = createSelector(
+  selectArticleState,
+  (state) => state.heroArticle
+)

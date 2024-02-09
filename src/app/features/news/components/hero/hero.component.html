@@ -1,0 +1,9 @@
+<section class="hero">
+    <div class="container">
+        <img
+            class="image"
+            *ngIf="articleImage$ | async as articleImage"
+            [src]="articleImage"
+            alt="Failed to load image">
+    </div>
+</section>

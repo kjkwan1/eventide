@@ -1,0 +1,14 @@
+<button class="filter-btn" (click)="toggle()">Filter</button>
+<div class="dropdown" *ngIf="showMenu">
+    <form [formGroup]="filterForm" class="form" (ngSubmit)="onSubmit()">
+        <div class="category-selector">
+            <label for="selectedCategory">Category</label>
+            <select formControlName="selectedCategory" id="selectedCategory">
+                @for (category of categories; track $index) {
+                    <option>{{ category }}</option>
+                }
+            </select>
+        </div>
+        <button type="submit" class="close-btn">Submit</button>
+    </form>
+</div>

@@ -1,4 +1,4 @@
 <header class="news-header">
     <h1 class="title">{{ article.title }}</h1>
-    <h3 class="subtitle"><span class="author">{{ article.author || 'uncredited' }}</span><span class="date">{{ article.published_at }}</span></h3>
+    <h3 class="subtitle"><span class="author">{{ article.author || 'uncredited' }}</span><span class="date">{{ article.published_at | date }}</span></h3>
 </header>

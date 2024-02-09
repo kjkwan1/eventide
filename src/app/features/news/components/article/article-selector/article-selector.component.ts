@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NewsBaseCategories } from '../../enum/news';
-import { NewsService } from '../../news.service';
+import { NewsBaseCategories } from '../../../enum/news';
+import { NewsService } from '../../../news.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'article-selector',
@@ -11,6 +12,10 @@ import { NewsService } from '../../news.service';
 export class ArticleSelectorComponent {
   public categories = Object.values(NewsBaseCategories);
   public showMenu: boolean = false;
+  public filterForm = new FormGroup({
+    selectedCategory: new FormControl(NewsBaseCategories.GENERAL),
+  });
+
   constructor(private newsService: NewsService) {}
 
   public onSelect(category: NewsBaseCategories) {
@@ -19,5 +24,12 @@ export class ArticleSelectorComponent {
 
   public toggle() {
     this.showMenu = !this.showMenu;
+  }
+
+  public onSubmit() {
+    const category = this.filterForm.value.selectedCategory;
+    if (category) {
+      this.newsService.selectCategory(category);
+    }
   }
 }

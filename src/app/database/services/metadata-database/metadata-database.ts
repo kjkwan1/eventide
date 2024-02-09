@@ -16,12 +16,26 @@ export class MetadataDatabase {
             this.storeName,
             {
                 category,
-                lastUpdated: new Date().toString()
+                lastUpdated: new Date().toString() // lastUpdated tracks when the data was refreshed, not when it was last written to.
             }, 
         );
     }
 
     public async getLastUpdated(category: string): Promise<IMetadataDatabase> {
         return this.baseDatabaseService.get<IMetadataDatabase>(this.storeName, category);
+    }
+
+    public async updateHeadlineArticleId(category: string, articleId: IDBValidKey): Promise<IDBValidKey> {
+        return this.baseDatabaseService.update(
+            this.storeName,
+            {
+                category,
+                headlineArticleId: articleId,
+            }
+        )
+    }
+
+    public async getHeadlineArticleId(category: string): Promise<IDBValidKey | null> {
+        return (await this.baseDatabaseService.get<IMetadataDatabase>(this.storeName, category)).headlineArticleId;
     }
 }

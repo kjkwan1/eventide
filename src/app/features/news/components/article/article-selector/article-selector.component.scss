@@ -1,0 +1,66 @@
+@import '/src/styles/variables';
+:host {
+    width: 100%;
+    padding: 1rem;
+    position: relative;
+}
+
+.dropdown {
+    box-sizing: border-box;
+    width: 28rem;
+    height: 32rem;
+    position: absolute;
+    z-index: 2;
+    background-color: $color-light-shade;
+    padding: 1rem;
+}
+
+.form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.category-selector {
+    width: 100%;
+    height: 100%;
+}
+
+#selectedCategory {
+    width: 100%;
+}
+
+.button{
+    background-color: $color-dark-accent;
+    color: $color-dark-shade;
+    padding: 1rem;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    user-select: none;
+    border-radius: 0.2rem;
+    box-shadow: $box-shadow-light;
+    margin: 0 0.4rem;
+}
+
+.close-btn {
+    border: none;
+    background-color: $color-light-shade;
+    margin-left: 1rem;
+    padding: 1rem 2rem;
+}
+
+.filter-btn {
+    border: none;
+    background-color: $color-light-shade;
+    padding: 1rem 2rem;
+    height: auto;
+    margin: 1.4rem;
+    margin-left: 0;
+    margin-bottom: 0;
+    padding-left: none;
+    height: 100%;
+}

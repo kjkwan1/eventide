@@ -1,25 +1,3 @@
-// export interface HeadlineResponse {
-//     status: string;
-//     totalResults: number;
-//     articles: Article[]
-// }
-
-// export interface Article {
-//     id?: IDBValidKey;
-//     source: {
-//         id: string;
-//         name: string;
-//     };
-//     author: string;
-//     title: string;
-//     description: string;
-//     url: string;
-//     urlToImage: string;
-//     publishedAt: string;
-//     content: string;
-//     category?:string;
-// }
-
 export interface MockMediaStackResponse {
     payload : MediaStackResponse;
 }
@@ -45,5 +23,11 @@ export interface MediaStackArticle {
     category: string;
     language: string;
     country: string;
-    published_at: Date;
+    published_at: string;
+    imageData: string | Blob;
+}
+
+export interface MediaStackArticleWithHeadline {
+    articles: MediaStackArticle[];
+    headline: MediaStackArticle | null;
 }

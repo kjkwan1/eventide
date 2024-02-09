@@ -11,7 +11,6 @@ import { NewsBaseCategories } from 'src/app/features/news/enum/news';
 export class BaseDatabaseService {
   private db!: IDBPDatabase<Database>;
   private version: number = 26;
-
   private dbName: string = 'eventide';
 
   constructor() {}
@@ -72,5 +71,9 @@ export class BaseDatabaseService {
 
   public delete(storeName: string, key: IDBValidKey) {
     return this.db.delete(storeName, key);
+  }
+
+  get dbInstance() {
+    return this.db;
   }
 }

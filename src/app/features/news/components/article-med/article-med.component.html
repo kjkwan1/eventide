@@ -1,0 +1,6 @@
+<article class="article-med">
+    <h1 class="title">{{ article.title }}</h1>
+    <h3 class="author"><span>{{ article.author }}</span><span class="date">{{ article.published_at | date }}</span></h3>
+    <img class="image" [src]="getStockImage()">
+    <article-content [article]="article"></article-content>
+</article>

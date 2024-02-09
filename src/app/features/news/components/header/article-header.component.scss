@@ -4,6 +4,11 @@
     & > * {
         margin: 1rem 0;
     }
+
+    box-shadow: $box-shadow-light;
+    background-color: $color-light-shade;
+    padding: 1rem;
+    margin: 1rem 0;
 }
 
 .subtitle, .author {

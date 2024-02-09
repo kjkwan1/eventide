@@ -1,0 +1,31 @@
+@import '/src/styles/variables';
+
+:host {
+    flex: 1;
+    width: 100%;
+}
+
+.article-med {
+    flex: 1;
+    margin: 1rem;
+    margin-top: 0;
+    padding: 1rem;
+    border-radius: 0.4rem;
+    box-shadow: $box-shadow-light;
+    background-color: $color-light-shade;
+}
+
+.title {
+    color: $color-primary;
+}
+
+.author {
+    display: flex;
+    justify-content: space-between;
+    font-size: $font-size-paragraph;
+    font-weight: 200;
+}
+
+.image {
+    width: 100%;
+}

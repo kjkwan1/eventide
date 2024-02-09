@@ -1,6 +1,0 @@
-<button class="filter-btn" *ngIf="!showMenu">Filter</button>
-<ul class="selector" *ngIf="showMenu">
-    @for (category of categories; track $index) {
-        <li class="button" (click)="onSelect(category)">{{ category }}</li>
-    }
-</ul>

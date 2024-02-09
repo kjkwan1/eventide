@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { NewsDataService } from '../news-data.service';
 import { NewsDatabase } from 'src/app/database/services/news-database/news.database';
 import { Initializable } from '../initializable';
-import { filter, firstValueFrom, take } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { NewsBaseCategories } from 'src/app/features/news/enum/news';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/state/app.state';
@@ -22,7 +22,7 @@ export class NewsInitializationService implements Initializable {
 
   public async init(): Promise<void> {
     await this.initializeHeadlineArticles();
-    // await this.initializeCategoryArticles();
+    await this.initializeCategoryArticles();
   }
 
   public async initializeHeadlineArticles(): Promise<void> {
